@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "sass": "^1.51.0"
+  },
+  "name": "festivalmusica_inicio",
+  "version": "1.0.0",
+  "description": "Proyecto con Gulps, SASS y HTML",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Gulp",
+    "SASS",
+    "y",
+    "HTML"
+  ],
+  "author": "Luis Armando Aguayo Aceves",
+  "license": "ISC"
+}
