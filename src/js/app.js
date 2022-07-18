@@ -3,20 +3,37 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function iniciarApp(){
+    navegacionFija();
     crearGaleria();
     scrollNav();
+    
+}
+
+function navegacionFija(){
+    const barra = document.querySelector('.header');//almacenar la clase header
+    const sobreFestival = document.querySelector('.sobre-festival');//almacenar la clase sobre festival
+
+    window.addEventListener('scroll', function(){//ejecutar funcion al usar el scroll
+        //console.log( sobreFestival.getBoundingClientRect() );//es un metodo el cual te da informacion del scroll (ej ubicacion)
+        if (sobreFestival.getBoundingClientRect().bottom<0) {//cuando pase la parte de abajo del la etiqueta con clase ".sobre-festival"
+             barra.classList.add('fijo');//agrega la clase fijo ala etiqueta header
+        }else{
+             barra.classList.remove('fijo');//mientras no, la quita
+        }
+
+    });
 }
 
 function scrollNav(){
-    const enlaces = document.querySelectorAll('.navegacion-principal a');
+    const enlaces = document.querySelectorAll('.navegacion-principal a');//almacenamos la etiqueta por la clase 
 
     enlaces.forEach(enlace => {
-        enlace.addEventListener('click', function(e) {
+        enlace.addEventListener('click', function(e) { //hacer una funcion al hacer click (escuchando)
              e.preventDefault();
 
-             const seccionScroll = e.target.attributes.href.value;
-             const seccion = document.querySelector(seccionScroll);
-             seccion.scrollIntoView({ behavior: "smooth"});
+             const seccionScroll = e.target.attributes.href.value; //almacenar el valor de la etiqueta a en una variable
+             const seccion = document.querySelector(seccionScroll);//seleccionar el valor segun la variable de arriva
+             seccion.scrollIntoView({ behavior: "smooth"});//es el metodo para el scroll lento
         });
     });
 }
