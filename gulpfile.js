@@ -74,14 +74,15 @@ function javascript(done) {
 
 function dev(done) {
     watch('src/scss/**/*.scss', css);
-    watch('src/scss/**/*.js', javascript);
+    watch('src/js/**/*.js', javascript);
     done();
 }
 
 exports.css = css;
 exports.js = javascript;
-exports.imagenes = imagenes;
+// exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
 //EJECUTAR FUNCIONES EN PARALELO
-exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev);
+// exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev); Para cuando quieres convertir las imagenes a avif y webp
+ exports.dev = parallel( javascript, dev);//solo correr el programa

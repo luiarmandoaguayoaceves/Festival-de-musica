@@ -12,11 +12,11 @@ function scrollNav(){
 
     enlaces.forEach(enlace => {
         enlace.addEventListener('click', function(e) {
-            e.preventDefault();
+             e.preventDefault();
 
-            const seccionScroll = e.target.attributes.href.value;
-            const seccion = document.querySelector(seccionScroll);
-            seccion.scrollIntoView({ bahavior: "smooth"});
+             const seccionScroll = e.target.attributes.href.value;
+             const seccion = document.querySelector(seccionScroll);
+             seccion.scrollIntoView({ behavior: "smooth"});
         });
     });
 }
