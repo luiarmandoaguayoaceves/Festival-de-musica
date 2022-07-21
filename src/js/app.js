@@ -12,13 +12,16 @@ function iniciarApp(){
 function navegacionFija(){
     const barra = document.querySelector('.header');//almacenar la clase header
     const sobreFestival = document.querySelector('.sobre-festival');//almacenar la clase sobre festival
+    const body = document.querySelector('body');
 
     window.addEventListener('scroll', function(){//ejecutar funcion al usar el scroll
         //console.log( sobreFestival.getBoundingClientRect() );//es un metodo el cual te da informacion del scroll (ej ubicacion)
         if (sobreFestival.getBoundingClientRect().bottom<0) {//cuando pase la parte de abajo del la etiqueta con clase ".sobre-festival"
              barra.classList.add('fijo');//agrega la clase fijo ala etiqueta header
+             body.classList.add('body-scroll');
         }else{
              barra.classList.remove('fijo');//mientras no, la quita
+             body.classList.remove('body-scroll');
         }
 
     });
