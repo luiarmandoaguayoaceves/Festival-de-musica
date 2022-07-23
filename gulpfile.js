@@ -10,30 +10,28 @@
 // exports.tarea = tarea;//para exportar y poder ejecutarla
 // exports.tarea2 = tarea2;
 
-import pkg from 'gulp';
-const { src, dest, watch, parallel } = pkg;
-//import { src, dest, watch, parallel } from 'gulp';//gulp compilacion tiempo real
+const { src, dest, watch, parallel } = require ('gulp');
+//const { src, dest, watch, parallel } require 'gulp';//gulp compilacion tiempo real
 
 //CSS
 
-import sass from ('gulp-sass','sass') ;
-import plumber from 'gulp-plumber';//plumber
-import autoprefixer from 'autoprefixer';//importar autoprefixer
-import cssnano from 'cssnano';//importar cssnano
-import postcss from 'postcss';//importar postcss
+const sass = require('gulp-sass')(require('sass'));//Aqui esta la linea de error
+const plumber = require ('gulp-plumber');//plumber
+const autoprefixer = require ('autoprefixer');//constar autoprefixer
+const cssnano = require ('cssnano');//constar cssnano
+const postcss = require('gulp-postcss');//constar postcss
 
 //IMAGENES
-import cache from 'gulp-cache';//para imagenpng
-import imagenmin from 'gulp-imagemin';//para imagen png
-import webp from 'gulp-webp';//para webp
-import avif from 'gulp-avif';//AVIF
+const cache = require ('gulp-cache');//para imagenpng
+const imagenmin = require ('gulp-imagemin');//para imagen png
+const webp = require ('gulp-webp');//para webp
+const avif = require ('gulp-avif');//AVIF
 
 function css( done ) {
     src('src/scss/**/*.scss')//Identificar scss a compilar
         .pipe(plumber())
         .pipe(sass())//Compilar
-        .pipe(sasss())
-        .pipe(postcss([autoprefixer(), cssnano()]))
+        .pipe( postcss([ autoprefixer(), cssnano() ]) )
         .pipe(dest('build/css'))//Almacenar
     done();
 }
@@ -85,15 +83,11 @@ function dev(done) {
     done();
 }
 
-const _css = css;
-export { _css as css };
-export const js = javascript;
+exports.css = css;
+exports.js = javascript;
 // exports.imagenes = imagenes;
-const _versionWebp = versionWebp;
-export { _versionWebp as versionWebp };
-const _versionAvif = versionAvif;
-export { _versionAvif as versionAvif };
+exports.versionWebp = versionWebp;
+exports.versionAvif = versionAvif;
 //EJECUTAR FUNCIONES EN PARALELO
 // exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev); Para cuando quieres convertir las imagenes a avif y webp
- const _dev = parallel(css, javascript, dev);
-export { _dev as dev };//solo correr el programa
+ exports.dev = parallel(css, javascript, dev);//solo correr el programa
