@@ -20,6 +20,7 @@ const plumber = require ('gulp-plumber');//plumber
 const autoprefixer = require ('autoprefixer');//constar autoprefixer
 const cssnano = require ('cssnano');//constar cssnano
 const postcss = require('gulp-postcss');//constar postcss
+const sourcemaps = require('gulp-sourcemaps')//para buscar en css un estilo espeficico para localizarlo
 
 //IMAGENES
 const cache = require ('gulp-cache');//para imagenpng
@@ -29,9 +30,11 @@ const avif = require ('gulp-avif');//AVIF
 
 function css( done ) {
     src('src/scss/**/*.scss')//Identificar scss a compilar
+        .pipe(sourcemaps.init())
         .pipe(plumber())
         .pipe(sass())//Compilar
         .pipe( postcss([ autoprefixer(), cssnano() ]) )
+        .pipe(sourcemaps.write('.'))
         .pipe(dest('build/css'))//Almacenar
     done();
 }
