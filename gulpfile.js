@@ -28,6 +28,9 @@ const imagenmin = require ('gulp-imagemin');//para imagen png
 const webp = require ('gulp-webp');//para webp
 const avif = require ('gulp-avif');//AVIF
 
+//JAVASCRIPT
+const terser = require('gulp-terser-js');
+
 function css( done ) {
     src('src/scss/**/*.scss')//Identificar scss a compilar
         .pipe(sourcemaps.init())
@@ -75,7 +78,10 @@ function versionAvif(done) {
 }
 function javascript(done) {
     src('src/js/**/**.js')
-        .pipe(dest('build/js'));
+        .pipe(sourcemaps.init())
+        .pipe(terser())
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('build/js'))
 
     done();
 }
@@ -88,9 +94,9 @@ function dev(done) {
 
 exports.css = css;
 exports.js = javascript;
-// exports.imagenes = imagenes;
+exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
 //EJECUTAR FUNCIONES EN PARALELO
-// exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev); Para cuando quieres convertir las imagenes a avif y webp
- exports.dev = parallel(css, javascript, dev);//solo correr el programa
+//exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev); Para cuando quieres convertir las imagenes a avif y webp
+exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev);//solo correr el programa
